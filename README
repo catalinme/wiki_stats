@@ -1,0 +1,12 @@
+* Hadoop scripts to process different statistics on Wikipedia Traffic dataset 
+  on Amazon EC2
+
+
+* To clone repo:
+
+	git@github.com:catalinme/wiki_stats.git
+
+
+* Wiki at: 
+
+	https://github.com/catalinme/wiki_stats/wiki
