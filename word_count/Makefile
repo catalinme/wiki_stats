@@ -9,8 +9,7 @@ all:
 	jar -cvf wordcount.jar -C bin/ .
 
 run:
-	hadoop jar wordcount.jar org.myorg.WordCount input/file1 output_1/
-	hadoop jar wordcount.jar org.myorg.WordCount input/file2 output_2/
+	hadoop jar wordcount.jar org.myorg.WordCount input/ output/
 	
 realclean: clean
 	rm -fr output*
