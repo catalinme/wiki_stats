@@ -32,7 +32,6 @@ public class WikiPageRank {
 					links = new String[totalLinks];
 
 					for (int i = 1; i < values.length; i++) {
-						//Text out = new Text(from + " 1.0 " + totalLinks);
 						Text out = new Text("1.0 " + totalLinks);
 						output.collect(new Text(values[i] + ":"), out);
 						System.out.println("!" + values[i] + ": " + out);
@@ -44,7 +43,6 @@ public class WikiPageRank {
 					links = new String[totalLinks];
 
 					for (int i = 2; i < values.length; i++) {
-						//Text out = new Text(from + " " + values[1] + " " + totalLinks); // don't forget to modify
 						Text out = new Text(values[1].substring(1) + " " + totalLinks);
 						output.collect(new Text(values[i] + ":"), out);
 						System.out.println("@" + values[i] + ": " + out);
@@ -60,8 +58,6 @@ public class WikiPageRank {
 				
 			output.collect(new Text(values[0]), new Text("#" + outLinks));
 			System.out.println(">" + new Text(values[0]) + " " + new Text("#" + outLinks));
-
-			//System.out.println(values[25]);
 		}
 	}
 
@@ -89,7 +85,6 @@ public class WikiPageRank {
 				}
 
 				splitValues = value.split("\\s+");
-				System.out.println("@@@@@@" + splitValues[0] + "@@@@@@");
 				pageRank = Float.valueOf(splitValues[0]);
 				linksCount = Integer.valueOf(splitValues[1]);
 
@@ -109,16 +104,13 @@ public class WikiPageRank {
 		conf.setOutputValueClass(Text.class);
 
 		conf.setMapperClass(Map.class);
-		//conf.setCombinerClass(Reduce.class);
 		conf.setReducerClass(Reduce.class);
 
 		conf.setInputFormat(TextInputFormat.class);
 		conf.setOutputFormat(TextOutputFormat.class);
 
-		//conf.set("mapred.job.tracker", "local");
-
-		FileInputFormat.setInputPaths(conf, inPath);//new Path(args[0]));
-		FileOutputFormat.setOutputPath(conf, outPath);//new Path(args[1]));
+		FileInputFormat.setInputPaths(conf, inPath);
+		FileOutputFormat.setOutputPath(conf, outPath);
 
 		JobClient.runJob(conf);
 
