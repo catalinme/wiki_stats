@@ -122,7 +122,7 @@ public class WikiPageEditPage {
 
 			output.collect(new LongWritable(edits), new Text(key.toString() +
 				"!@#" + timestamps.substring(0, timestamps.length() - 1) +
-				"!@#" +users.substring(0, users.length() - 1) +
+				"!@#" + users.substring(0, users.length() - 1) +
 				"!@#" + actions.substring(0, actions.length() - 1)));
 		}
 	}
