@@ -1,7 +1,6 @@
 #!/bin/bash
 
 USAGE="Usage: ./run.sh -a ALGORITHM -s SORT -m MAPPERS -r REDUCERS [-n LINES]\n\tALGORITHM: page (page edits) | user (user edits)\n\tSORT: id (page/user ID) | edits (number of edits) | no (don't sort)"
-LINES=5
 NAME=""
 INPUT=input/input.txt
 OUTPUT=output/
@@ -30,21 +29,11 @@ then
 	exit
 fi
 
-if [ $# -gt 8 -a $# -ne 10 ]
+if [ $# -gt 8 ]
 then
 	echo "Invalid number of parameters"
 	echo -e $USAGE
 	exit
-fi
-
-if [ $# -eq 10 ]
-then
-	if [ "$9" != "-n" ]
-	then
-		echo "Bad parameters"
-		echo -e $USAGE
-		exit
-	fi
 fi
 
 if [ "$2" == "page" ]
@@ -66,7 +55,7 @@ time hadoop jar $NAME.jar org.myorg.$NAME $INPUT $OUTPUT $MAPPERS $REDUCERS $4
 
 if [ "$4" == no -o "$4" == id ]
 then
-	time hadoop dfs -getmerge output output/output.txt
+	time hadoop dfs -getmerge $OUTPUT $LOCAL_OUTPUT
 else
-	time hadoop dfs -getmerge output/2 output/output.txt
+	time hadoop dfs -getmerge $OUTPUT/2 $LOCAL_OUTPUT
 fi
